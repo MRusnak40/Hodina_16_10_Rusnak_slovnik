@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            
+            Slovnik slovnik = new Slovnik();
+           
+
+
         }
     }
 }

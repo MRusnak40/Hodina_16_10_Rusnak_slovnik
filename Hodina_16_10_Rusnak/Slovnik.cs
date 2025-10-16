@@ -10,12 +10,14 @@ namespace Hodina_16_10_Rusnak
     public class Slovnik
     {
 
-        Dictionary<int, string> slovnik;
+        Dictionary<int, string> slovnikKodovani;
         int numberOfItems = 0;
+        
 
         public Slovnik()
         {
-            slovnik = new Dictionary<int, string>();
+            slovnikKodovani = new Dictionary<int, string>();
+            
         }
 
 
@@ -24,22 +26,22 @@ namespace Hodina_16_10_Rusnak
         public void Pridej(string hodnota)
         {
 
-            slovnik.Add(numberOfItems, hodnota);
+            slovnikKodovani.Add(numberOfItems, hodnota);
             numberOfItems++;
         }
 
 
 
-
+        //vypis slovniku Zakodovaneho
         public void Vypis()
         {
-            foreach (var item in slovnik)
+            foreach (var item in slovnikKodovani)
             {
                 Console.WriteLine($"Klic: {item.Key}, Hodnota: {item.Value}");
             }
         }
 
-
+        //pridani slov do slovniku TOlower a odebrani diakritiky
         public void PridaniSlov(String text)
         {
             string[] slova = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -60,7 +62,7 @@ namespace Hodina_16_10_Rusnak
 
                 */
                 //add here the method for removing diacritics
-
+                OdebraniDiakritiy(slovo);
             }
 
 
@@ -68,7 +70,8 @@ namespace Hodina_16_10_Rusnak
 
         }
 
-        //navrh Visual Studia
+        //navrh Visual Studia (funguje)
+        //odebirani diakritiky slova
         public string OdebraniDiakritiy(string slovo)
         {
 
