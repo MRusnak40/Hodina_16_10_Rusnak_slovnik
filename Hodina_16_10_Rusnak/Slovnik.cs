@@ -48,15 +48,18 @@ namespace Hodina_16_10_Rusnak
             {
                 slovo.ToLower();
 
+                /*
                 char[] slovoArray = slovo.ToCharArray();
 
                 foreach(char c in slovoArray)
                 {
                    
-
+                
 
                 }
 
+                */
+                //add here the method for removing diacritics
 
             }
 
