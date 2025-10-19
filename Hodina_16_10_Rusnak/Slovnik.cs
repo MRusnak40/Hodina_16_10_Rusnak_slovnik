@@ -12,12 +12,12 @@ namespace Hodina_16_10_Rusnak
 
         Dictionary<int, string> slovnikKodovani;
         int numberOfItems = 0;
-        
+
 
         public Slovnik()
         {
             slovnikKodovani = new Dictionary<int, string>();
-            
+
         }
 
 
@@ -62,7 +62,9 @@ namespace Hodina_16_10_Rusnak
 
                 */
                 //add here the method for removing diacritics
-                OdebraniDiakritiy(slovo);
+                slovo = OdebraniDiakritiy(slovo);
+                Pridej(slovo);
+
             }
 
 
@@ -99,5 +101,16 @@ namespace Hodina_16_10_Rusnak
                 .ToArray());
         }
         */
+
+
     }
+    
+
+
+    
+
+
+
+
+
 }
