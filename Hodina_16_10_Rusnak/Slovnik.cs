@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Hodina_16_10_Rusnak
 {
@@ -12,7 +13,9 @@ namespace Hodina_16_10_Rusnak
 
         Dictionary<int, string> slovnikKodovani;
         int numberOfItems = 0;
-
+        private string slovicko;
+        List<string> seznamSlov = new List<string>();
+        List<int> seznamKodu = new List<int>();
 
         public Slovnik()
         {
@@ -46,7 +49,7 @@ namespace Hodina_16_10_Rusnak
         {
             string[] slova = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var slovo in slova)
+            foreach (string slovo in slova)
             {
                 slovo.ToLower();
 
@@ -62,8 +65,13 @@ namespace Hodina_16_10_Rusnak
 
                 */
                 //add here the method for removing diacritics
-                slovo = OdebraniDiakritiy(slovo);
-                Pridej(slovo);
+                slovicko = OdebraniDiakritiy(slovo);
+                seznamSlov.Add(slovicko);
+                if (!slovnikKodovani.ContainsValue(slovicko))
+                {
+                    Pridej(slovicko);
+                }
+
 
             }
 
@@ -102,15 +110,85 @@ namespace Hodina_16_10_Rusnak
         }
         */
 
+        public void VypisKodem()
+        {
+            foreach (var item in seznamSlov)
+            {
 
+                foreach (var pair in slovnikKodovani)
+                {
+                    if (pair.Value == item)
+                    {
+                        Console.Write($"{pair.Key} ");
+                    }
+                }
+
+
+
+
+            }
+            Console.WriteLine(" ");
+
+        }
+
+
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Slovnik slovnik &&
+                   EqualityComparer<Dictionary<int, string>>.Default.Equals(slovnikKodovani, slovnik.slovnikKodovani);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(slovnikKodovani);
+        }
+
+
+
+
+        public void dekodovani(string text)
+        {
+            string[] slova = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine("Dekódované slovo: ");
+            foreach (string slovo in slova)
+            {
+                try
+                {
+                    int kod = int.Parse(slovo);
+                    if (slovnikKodovani.ContainsKey(kod))
+                    {
+                        foreach (var pair in slovnikKodovani)
+                        {
+                            if (pair.Key == kod)
+                            {
+                                Console.Write($"{pair.Value} ");
+                            }
+
+                        }
+
+                    }
+                    else { Console.WriteLine($"? "); }
+
+
+                }
+
+                catch (FormatException)
+                {
+                    Console.WriteLine($"?");
+
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+        }
     }
-    
-
-
-    
-
-
-
-
-
 }
